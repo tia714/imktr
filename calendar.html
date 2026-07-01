@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>SARPRAS FTI</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@400..900&family=League+Spartan&family=Outfit:wght@400;500;600;700;900&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+            extend: {
+                "colors": {
+                    "surface-container-high": "#edf4ff",
+                    "on-primary-fixed": "#001221",
+                    "on-tertiary-fixed-variant": "#c80a00",
+                    "secondary-fixed-dim": "#ffb01f",
+                    "on-secondary-fixed": "#001221",
+                    "surface-dim": "#d3e4ff",
+                    "secondary": "#ffb01f",
+                    "primary-fixed-dim": "#ffb01f",
+                    "secondary-container": "#ffb01f",
+                    "primary": "#003765",
+                    "on-secondary-fixed-variant": "#001221",
+                    "on-primary-container": "#ffffff",
+                    "tertiary": "#c80a00",
+                    "outline": "#737780",
+                    "on-background": "#001221",
+                    "on-error": "#ffffff",
+                    "secondary-fixed": "#ffb01f",
+                    "surface-tint": "#003765",
+                    "on-tertiary-fixed": "#001221",
+                    "on-surface-variant": "#001221",
+                    "tertiary-fixed": "#c80a00",
+                    "tertiary-container": "#c80a00",
+                    "primary-container": "#003765",
+                    "surface": "#f7f9ff",
+                    "inverse-surface": "#001221",
+                    "on-error-container": "#93000a",
+                    "tertiary-fixed-dim": "#c80a00",
+                    "inverse-primary": "#ffb01f",
+                    "surface-variant": "#d3e4ff",
+                    "surface-container-low": "#f0f5ff",
+                    "on-surface": "#001221",
+                    "error": "#ba1a1a",
+                    "on-secondary": "#001221",
+                    "outline-variant": "#c3c6d0",
+                    "on-secondary-container": "#001221",
+                    "error-container": "#ffdad6",
+                    "surface-container-highest": "#d3e4ff",
+                    "inverse-on-surface": "#ffffff",
+                    "primary-fixed": "#003765",
+                    "on-primary-fixed-variant": "#ffffff",
+                    "surface-container": "#e2efff",
+                    "surface-bright": "#ffffff",
+                    "background": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary-container": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "on-tertiary": "#ffffff"
+                },
+                "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                },
+                "spacing": {
+                        "sm": "8px",
+                        "md": "16px",
+                        "edge-margin": "16px",
+                        "lg": "24px",
+                        "base": "4px",
+                        "xl": "32px",
+                        "xs": "4px",
+                        "gutter": "12px"
+                },
+                "fontFamily": {
+                        "headline-lg": ["Outfit"],
+                        "label-md": ["Alegreya"],
+                        "body-md": ["League Spartan"],
+                        "headline-lg-mobile": ["Outfit"],
+                        "label-sm": ["Alegreya"],
+                        "headline-md": ["Outfit"],
+                        "body-lg": ["League Spartan"]
+                },
+                "fontSize": {
+                        "headline-lg": ["30px", {"lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "label-sm": ["11px", {"lineHeight": "14px", "fontWeight": "500"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                }
+            },
+            },
+        }
+    </script>
+</head>
+
+<body class="bg-surface text-on-surface min-h-screen pb-28">
+
+<header class="fixed top-0 w-full z-50 bg-white border-b border-outline-variant/30 shadow-sm flex items-center h-16">
+    <div class="w-full max-w-4xl mx-auto px-4 md:px-6 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+            <h1 class="font-headline-md text-xl md:text-2xl font-bold text-primary">Schedule & Booking</h1>
+        </div>
+    </div>
+</header>
+
+<main class="pt-24 px-4 md:px-6 max-w-4xl mx-auto space-y-6">
+
+    <div class="flex items-center justify-between mb-4">
+
+    <button id="prevMonth"
+        class="p-2 rounded-full hover:bg-gray-100">
+        ←
+    </button>
+
+    <h2 id="monthYear"
+        class="font-bold text-lg">
+    </h2>
+
+    <button id="nextMonth"
+        class="p-2 rounded-full hover:bg-gray-100">
+        →
+    </button>
+
+</div>
+
+<div
+    id="calendar"
+    class="grid grid-cols-7 gap-2">
+</div>
+
+    <div class="space-y-3">
+        <h3 class="font-headline-md text-base font-bold text-primary px-1">Occupied Details (Today)</h3>
+        
+        <div class="bg-white border-l-4 border-tertiary rounded-xl p-4 shadow-sm flex items-center justify-between">
+            <div class="space-y-0.5">
+                <p class="font-body-lg text-sm font-bold text-on-surface">Studio Multimedia A</p>
+                <p class="text-xs text-outline flex items-center gap-1">
+                    <span class="material-symbols-outlined text-xs">schedule</span> 08:00 AM - 04:00 PM
+                </p>
+            </div>
+            <span class="text-[11px] bg-error-container text-on-error-container font-bold px-2.5 py-1 rounded-full">Booked</span>
+        </div>
+
+        <div class="bg-white border-l-4 border-tertiary rounded-xl p-4 shadow-sm flex items-center justify-between">
+            <div class="space-y-0.5">
+                <p class="font-body-lg text-sm font-bold text-on-surface">Ultimaker 3D Printer v3</p>
+                <p class="text-xs text-outline flex items-center gap-1">
+                    <span class="material-symbols-outlined text-xs">person</span> Borrowed by Creative Dept
+                </p>
+            </div>
+            <span class="text-[11px] bg-error-container text-on-error-container font-bold px-2.5 py-1 rounded-full">In Use</span>
+        </div>
+    </div>
+
+</main>
+
+<nav class="fixed bottom-0 w-full z-50 bg-surface dark:bg-surface-dim border-t border-outline-variant shadow-lg flex justify-around items-center h-16 pb-safe px-2">
+        <a href="home.html" class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim font-bold transition-all active:scale-90 duration-200" href="#">
+            <span class="material-symbols-outlined" data-icon="home">home</span>
+            <span class="font-label-md text-label-md">Home</span>
+        </a>
+        <a href="calendar.html" class="flex flex-col items-center justify-center text-on-surface-variant transition-all hover:bg-surface-container-high active:scale-90 duration-200" href="#">
+            <span class="material-symbols-outlined" data-icon="calendar_month" style="font-variation-settings: 'FILL' 1;">calendar_month</span>
+            <span class="font-label-md text-label-md">Schedule</span>
+        </a>
+        <div class="-mt-8">
+            <button class="w-14 h-14 bg-tertiary-container text-white rounded-full flex items-center justify-center shadow-xl border-4 border-background active:scale-90 transition-transform">
+                <span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" />
+                    </svg>
+                </span>
+            </button>
+        </div>
+        <a class="flex flex-col items-center justify-center text-on-surface-variant transition-all hover:bg-surface-container-high active:scale-90 duration-200" href="#">
+            <span class="material-symbols-outlined" data-icon="history">history</span>
+            <span class="font-label-md text-label-md">History</span>
+        </a>
+        <a href="profile.html" class="flex flex-col items-center justify-center text-on-surface-variant transition-all hover:bg-surface-container-high active:scale-90 duration-200" href="#">
+            <span class="material-symbols-outlined" data-icon="person">person</span>
+            <span class="font-label-md text-label-md">Profile</span>
+        </a>
+    </nav>
+
+
+<div class="fixed inset-0 pointer-events-none opacity-[0.02] mix-blend-overlay z-50">
+    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <filter id="noiseFilter">
+            <feTurbulence baseFrequency="0.65" numOctaves="3" stitchTiles="stitch" type="fractalNoise"></feTurbulence>
+        </filter>
+        <rect filter="url(#noiseFilter)" height="100%" width="100%"></rect>
+    </svg>
+</div>
+
+<script src="calendar.js"></script>
+
+</body>
+</html>
