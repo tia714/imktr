@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>SARPRAS FTI</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@400..900&family=League+Spartan&family=Outfit:wght@400;500;600;700;900&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+            extend: {
+                "colors": {
+                    "surface-container-high": "#edf4ff",
+                    "on-primary-fixed": "#001221",
+                    "on-tertiary-fixed-variant": "#c80a00",
+                    "secondary-fixed-dim": "#ffb01f",
+                    "on-secondary-fixed": "#001221",
+                    "surface-dim": "#d3e4ff",
+                    "secondary": "#ffb01f",
+                    "primary-fixed-dim": "#ffb01f",
+                    "secondary-container": "#ffb01f",
+                    "primary": "#003765",
+                    "on-secondary-fixed-variant": "#001221",
+                    "on-primary-container": "#ffffff",
+                    "tertiary": "#c80a00",
+                    "outline": "#737780",
+                    "on-background": "#001221",
+                    "on-error": "#ffffff",
+                    "secondary-fixed": "#ffb01f",
+                    "surface-tint": "#003765",
+                    "on-tertiary-fixed": "#001221",
+                    "on-surface-variant": "#001221",
+                    "tertiary-fixed": "#c80a00",
+                    "tertiary-container": "#c80a00",
+                    "primary-container": "#003765",
+                    "surface": "#f7f9ff",
+                    "inverse-surface": "#001221",
+                    "on-error-container": "#93000a",
+                    "tertiary-fixed-dim": "#c80a00",
+                    "inverse-primary": "#ffb01f",
+                    "surface-variant": "#d3e4ff",
+                    "surface-container-low": "#f0f5ff",
+                    "on-surface": "#001221",
+                    "error": "#ba1a1a",
+                    "on-secondary": "#001221",
+                    "outline-variant": "#c3c6d0",
+                    "on-secondary-container": "#001221",
+                    "error-container": "#ffdad6",
+                    "surface-container-highest": "#d3e4ff",
+                    "inverse-on-surface": "#ffffff",
+                    "primary-fixed": "#003765",
+                    "on-primary-fixed-variant": "#ffffff",
+                    "surface-container": "#e2efff",
+                    "surface-bright": "#ffffff",
+                    "background": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary-container": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "on-tertiary": "#ffffff"
+                },
+                "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                },
+                "spacing": {
+                        "sm": "8px",
+                        "md": "16px",
+                        "edge-margin": "16px",
+                        "lg": "24px",
+                        "base": "4px",
+                        "xl": "32px",
+                        "xs": "4px",
+                        "gutter": "12px"
+                },
+                "fontFamily": {
+                        "headline-lg": ["Outfit"],
+                        "label-md": ["Alegreya"],
+                        "body-md": ["League Spartan"],
+                        "headline-lg-mobile": ["Outfit"],
+                        "label-sm": ["Alegreya"],
+                        "headline-md": ["Outfit"],
+                        "body-lg": ["League Spartan"]
+                },
+                "fontSize": {
+                        "headline-lg": ["30px", {"lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "label-sm": ["11px", {"lineHeight": "14px", "fontWeight": "500"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                }
+            },
+            },
+        }
+    </script>
+</head>
+
+<body class="bg-background text-[#00223d] font-body-md selection:bg-[#eff8ff] selection:text-[#00223d] overflow-x-hidden">
+    <main class="pt-4 pb-24 px-edge-margin space-y-6">
+        
+        <!-- Header: Menu Icon, Title, Notification Bell -->
+        <header class="flex items-center justify-between py-2 relative">
+            <a href="home.html" class="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center text-[#00223d] active:scale-95 transition-all">
+                <span class="material-symbols-outlined text-xl">arrow_back</span>
+            </a>
+            <h1 id="page-title" class="text-xl font-bold font-['Outfit'] text-[#00223d] absolute left-1/2 -translate-x-1/2">
+                Report Lost Item
+            </h1>
+            <button class="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center text-[#00223d] active:scale-95 transition-all relative">
+                <span class="material-symbols-outlined text-xl">notifications</span>
+                <span class="absolute top-3 right-3 w-1.5 h-1.5 bg-[#b80900] rounded-full"></span>
+            </button>
+        </header>
+
+    <div class="bg-surface-container-low p-1.5 rounded-xl flex items-center shadow-sm border border-outline-variant max-w-md mx-auto">
+        <button class="flex-1 py-2.5 px-4 rounded-lg font-label-md text-label-md transition-all duration-200 bg-primary text-white shadow-sm" id="toggleLost" onclick="setToggle('lost')">
+            Lost Item
+        </button>
+        <button class="flex-1 py-2.5 px-4 rounded-lg font-label-md text-label-md transition-all duration-200 text-on-surface-variant hover:bg-surface-container-high" id="toggleFound" onclick="setToggle('found')">
+            Found Item
+        </button>
+    </div>
+
+    <div class="bg-white border border-outline-variant/40 rounded-2xl p-5 md:p-8 shadow-sm">
+        <form class="space-y-6">
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                
+                <div class="flex flex-col gap-2">
+                    <label id="label-photo" class="font-label-md text-xs font-bold text-on-surface-variant uppercase tracking-wider">Item Photo</label>
+                    
+                    <div onclick="triggerPhotoUpload()" class="relative group border-2 border-dashed border-outline-variant rounded-xl h-full min-h-[180px] flex flex-col items-center justify-center bg-surface-container-lowest hover:bg-surface-container-low transition-all cursor-pointer overflow-hidden">
+                        
+                        <div id="upload-placeholder" class="flex flex-col items-center gap-2 group-hover:scale-105 transition-transform duration-300 z-10 p-4 text-center">
+                            <span class="material-symbols-outlined text-4xl text-primary">add_a_photo</span>
+                            <span id="text-photo" class="font-body-md text-body-md text-on-surface-variant font-medium">Tap to add lost item photo</span>
+                        </div>
+
+                        <img id="photo-preview" class="absolute inset-0 w-full h-full object-cover hidden z-20" alt="Preview item">
+
+                        <div id="change-photo-overlay" class="absolute bottom-2 right-2 bg-black/70 text-white px-3 py-1.5 rounded-lg font-label-md text-xs items-center gap-1 hidden z-30 pointer-events-none">
+                            <span class="material-symbols-outlined text-sm">edit</span> Change Photo
+                        </div>
+                    </div>
+
+                    <input type="file" id="item-photo-input" accept="image/*" class="hidden" onchange="previewImage(event)">
+                </div>
+
+                <div class="space-y-4">
+                    <div class="flex flex-col gap-2">
+                        <label class="font-label-md text-sm font-semibold text-on-surface-variant" id="label-name" for="item_name">Lost Item Name</label>
+                        <input class="w-full bg-surface-container-low border border-outline-variant rounded-lg p-3 font-body-md text-body-md focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" id="item_name" placeholder="e.g. MacBook Pro Charger" type="text" required>
+                    </div>
+
+                    <div class="flex flex-col gap-2">
+                        <label class="font-label-md text-sm font-semibold text-on-surface-variant" for="category">Category</label>
+                        <div class="relative">
+                            <select class="w-full appearance-none bg-surface-container-low border border-outline-variant rounded-lg p-3 font-body-md text-body-md focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" id="category">
+                                <option>Electronics</option>
+                                <option>Keys & Access Cards</option>
+                                <option>Books & Notebooks</option>
+                                <option>Wallets & Bags</option>
+                                <option>Clothing</option>
+                                <option>Other</option>
+                            </select>
+                            <span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">expand_more</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-col gap-2">
+                <label class="font-label-md text-sm font-semibold text-on-surface-variant" id="label-location" for="location">Last Seen Location</label>
+                <div class="relative">
+                    <input class="w-full bg-surface-container-low border border-outline-variant rounded-lg pl-10 pr-3 py-3 font-body-md text-body-md focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" id="location" placeholder="e.g. Room 302, 3rd Floor FTI" type="text" required>
+                    <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-primary">location_on</span>
+                </div>
+            </div>
+
+            <div id="found-extra-fields" class="flex flex-col gap-2 hidden">
+                <label class="font-label-md text-sm font-semibold text-on-surface-variant" for="storage_location">Current Storage / Safe Location</label>
+                <div class="relative">
+                    <input class="w-full bg-surface-container-low border border-outline-variant rounded-lg pl-10 pr-3 py-3 font-body-md text-body-md focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" id="storage_location" placeholder="e.g. Secured at Sarpras FTI Front Desk Office" type="text">
+                    <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-primary">inventory_2</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="flex flex-col gap-2">
+                    <label class="font-label-md text-sm font-semibold text-on-surface-variant" id="label-date" for="date">Estimated Date Lost</label>
+                    <input class="w-full bg-surface-container-low border border-outline-variant rounded-lg p-3 font-body-md text-body-md focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" id="date" type="date" required>
+                </div>
+                <div class="flex flex-col gap-2">
+                    <label class="font-label-md text-sm font-semibold text-on-surface-variant" id="label-time" for="time">Approximate Time</label>
+                    <input class="w-full bg-surface-container-low border border-outline-variant rounded-lg p-3 font-body-md text-body-md focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" id="time" type="time">
+                </div>
+            </div>
+
+            <div class="flex flex-col gap-2">
+                <label class="font-label-md text-sm font-semibold text-on-surface-variant" id="label-desc" for="description">Description</label>
+                <textarea class="w-full bg-surface-container-low border border-outline-variant rounded-lg p-3 font-body-md text-body-md focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all resize-none" id="description" placeholder="Describe unique features, markings, colors, or brand details..." rows="4" required></textarea>
+            </div>
+
+            <button class="w-full bg-secondary-container hover:bg-secondary-container/90 text-on-secondary-container font-semibold py-4 rounded-xl shadow-md transition-all active:scale-[0.99] duration-150 flex items-center justify-center gap-2 text-base" type="submit">
+                <span class="material-symbols-outlined">send</span>
+                <span id="submit-text">Submit Lost Report</span>
+            </button>
+        </form>
+    </div>
+</main>
+
+    <nav class="fixed bottom-0 w-full z-50 bg-white border-t border-outline-variant shadow-lg flex justify-around items-center h-16 pb-safe px-2">
+        <a href="home.html" class="flex flex-col items-center justify-center text-[#00223d] font-bold transition-all active:scale-90 duration-200">
+            <span class="material-symbols-outlined" data-icon="home">home</span>
+            <span class="font-['Outfit'] text-xs mt-0.5">Home</span>
+        </a>
+        <a href="calendar.html" class="flex flex-col items-center justify-center text-[#00223d] hover:text-[#00223d]/80 transition-all active:scale-90 duration-200">
+            <span class="material-symbols-outlined" data-icon="calendar_month">calendar_month</span>
+            <span class="font-['Outfit'] text-xs mt-0.5">Schedule</span>
+        </a>
+        <!-- Wrapper dengan class 'relative' agar koordinat absolute popup presisi di atas tombol -->
+        <div class="relative -mt-8">
+            <!-- Tombol Add -->
+            <button id="add-btn" class="w-14 h-14 bg-[#00223d] text-white rounded-full flex items-center justify-center shadow-xl border-4 border-white active:scale-90 hover:scale-105 transition-all duration-200">
+                <span class="material-symbols-outlined text-2xl transition-transform duration-200" id="add-icon">add</span>
+            </button>
+
+            <!-- Popup Menu (Gaya Gelembung Pesan / Tooltip) -->
+            <div id="add-menu" class="hidden absolute bottom-full left-1/2 -translate-x-1/2 mb-4 bg-white dark:bg-zinc-800 rounded-2xl shadow-[0_10px_35px_-5px_rgba(0,0,0,0.15)] dark:shadow-[0_10px_35px_-5px_rgba(0,0,0,0.3)] border border-gray-100 dark:border-zinc-700/80 p-2 w-56 flex flex-col gap-1 z-50">
+
+
+                <!-- Segitiga Penunjuk -->
+                <div class="popup-arrow bg-white dark:bg-zinc-800"></div>
+
+                <!-- Opsi 1: Pinjam Ruang -->
+                <a href="pinjam.html?tab=ruang" class="flex items-center gap-3 px-3 py-2 rounded-xl text-[#00223d] hover:bg-gray-100 dark:hover:bg-zinc-700/60 transition-colors active:scale-98 duration-100">
+                    <span class="material-symbols-outlined text-blue-500 dark:text-blue-400 text-xl">meeting_room</span>
+                    <span class="text-sm font-medium font-['Outfit']">Pinjam Ruang</span>
+                </a>
+
+                <!-- Opsi 2: Pinjam Alat -->
+                <a href="pinjam.html?tab=alat" class="flex items-center gap-3 px-3 py-2 rounded-xl text-[#00223d] hover:bg-gray-100 dark:hover:bg-zinc-700/60 transition-colors active:scale-98 duration-100">
+                    <span class="material-symbols-outlined text-emerald-500 dark:text-emerald-400 text-xl">construction</span>
+                    <span class="text-sm font-medium font-['Outfit']">Pinjam Alat</span>
+                </a>
+
+                <!-- Opsi 3: Report Missing Item -->
+                <a href="reportlost.html" class="flex items-center gap-3 px-3 py-2 rounded-xl text-[#00223d] hover:bg-gray-100 dark:hover:bg-zinc-700/60 transition-colors active:scale-98 duration-100">
+                    <span class="material-symbols-outlined text-amber-500 dark:text-amber-400 text-xl">search_off</span>
+                    <span class="text-sm font-medium font-['Outfit']">Report Missing Item</span>
+                </a>
+
+                <!-- Opsi 4: Report Found Item -->
+                <a href="lostnfound.html" class="flex items-center gap-3 px-3 py-2 rounded-xl text-[#00223d] hover:bg-gray-100 dark:hover:bg-zinc-700/60 transition-colors active:scale-98 duration-100">
+                    <span class="material-symbols-outlined text-indigo-500 dark:text-indigo-400 text-xl">inventory_2</span>
+                    <span class="text-sm font-medium font-['Outfit']">Report Found Item</span>
+                </a>
+
+                <!-- Garis Pembatas (Divider) -->
+                <div class="h-[1px] bg-gray-100 dark:bg-zinc-700/50 my-1"></div>
+
+                <!-- Opsi 5: Emergency Call (Diberi warna merah sebagai prioritas/peringatan) -->
+                <a href="tel:112" class="flex items-center gap-3 px-3 py-2 rounded-xl text-[#b80900] hover:bg-red-50 dark:hover:bg-red-950/30 transition-colors active:scale-98 duration-100">
+                    <span class="material-symbols-outlined text-[#b80900] text-xl">emergency</span>
+                    <span class="text-sm font-semibold font-['Outfit']">Emergency Call</span>
+                </a>
+            </div>
+        </div>
+        <a class="flex flex-col items-center justify-center text-[#00223d] hover:text-[#00223d]/80 transition-all active:scale-90 duration-200" href="#">
+            <span class="material-symbols-outlined" data-icon="history">history</span>
+            <span class="font-['Outfit'] text-xs mt-0.5">History</span>
+        </a>
+        <a href="profile.html" class="flex flex-col items-center justify-center text-[#00223d] hover:text-[#00223d]/80 transition-all active:scale-90 duration-200">
+            <span class="material-symbols-outlined" data-icon="person">person</span>
+            <span class="font-['Outfit'] text-xs mt-0.5">Profile</span>
+        </a>
+    </nav>
+
+<div class="fixed inset-0 pointer-events-none opacity-[0.02] mix-blend-overlay z-50">
+    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <filter id="noiseFilter">
+            <feTurbulence baseFrequency="0.65" numOctaves="3" stitchTiles="stitch" type="fractalNoise"></feTurbulence>
+        </filter>
+        <rect filter="url(#noiseFilter)" height="100%" width="100%"></rect>
+    </svg>
+</div>
+
+<script>
+    // Fungsi untuk memicu input type file bawaan sistem operasi / direktori
+    function triggerPhotoUpload() {
+        document.getElementById('item-photo-input').click();
+    }
+
+    // Fungsi membaca data berkas direktori lokal dan mengubahnya menjadi visual preview gambar
+    function previewImage(event) {
+        const fileInput = event.target;
+        const previewImg = document.getElementById('photo-preview');
+        const placeholder = document.getElementById('upload-placeholder');
+        const changeOverlay = document.getElementById('change-photo-overlay');
+
+        if (fileInput.files && fileInput.files[0]) {
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                // Pasang data gambar biner base64 ke src elemen img
+                previewImg.src = e.target.result;
+                
+                // Ubah status visibilitas elemen penampil gambar
+                previewImg.classList.remove('hidden');
+                placeholder.classList.add('opacity-0'); // Sembunyikan teks ikon default
+                changeOverlay.classList.remove('hidden');
+                changeOverlay.classList.add('flex');
+            }
+            
+            reader.readAsDataURL(fileInput.files[0]);
+        }
+    }
+
+    function setToggle(type) {
+        const lostBtn = document.getElementById('toggleLost');
+        const foundBtn = document.getElementById('toggleFound');
+        
+        const pageTitle = document.getElementById('page-title');
+        const textPhoto = document.getElementById('text-photo');
+        const labelName = document.getElementById('label-name');
+        const labelLocation = document.getElementById('label-location');
+        const labelDate = document.getElementById('label-date');
+        const submitText = document.getElementById('submit-text');
+        const foundExtraFields = document.getElementById('found-extra-fields');
+
+        if (type === 'lost') {
+            lostBtn.classList.add('bg-primary', 'text-white', 'shadow-sm');
+            lostBtn.classList.remove('text-on-surface-variant', 'hover:bg-surface-container-high');
+            foundBtn.classList.remove('bg-primary', 'text-white', 'shadow-sm');
+            foundBtn.classList.add('text-on-surface-variant', 'hover:bg-surface-container-high');
+
+            if (pageTitle) pageTitle.textContent = "Report Lost Item";
+            textPhoto.textContent = "Tap to add lost item photo";
+            labelName.textContent = "Lost Item Name";
+            labelLocation.textContent = "Last Seen Location";
+            labelDate.textContent = "Estimated Date Lost";
+            submitText.textContent = "Submit Lost Report";
+            
+            foundExtraFields.classList.add('hidden');
+            document.getElementById('item_name').placeholder = "e.g. MacBook Pro Charger";
+            document.getElementById('location').placeholder = "e.g. Room 302, 3rd Floor FTI";
+        } else {
+            foundBtn.classList.add('bg-primary', 'text-white', 'shadow-sm');
+            foundBtn.classList.remove('text-on-surface-variant', 'hover:bg-surface-container-high');
+            lostBtn.classList.remove('bg-primary', 'text-white', 'shadow-sm');
+            lostBtn.classList.add('text-on-surface-variant', 'hover:bg-surface-container-high');
+
+            if (pageTitle) pageTitle.textContent = "Report Found Item";
+            textPhoto.textContent = "Tap to add found item photo";
+            labelName.textContent = "Found Item Name";
+            labelLocation.textContent = "Found Location";
+            labelDate.textContent = "Date Found";
+            submitText.textContent = "Submit Found Report";
+            
+            foundExtraFields.classList.remove('hidden');
+            document.getElementById('item_name').placeholder = "e.g. Black Leather Wallet";
+            document.getElementById('location').placeholder = "e.g. Bench near FTI Corridor A";
+        }
+    }
+
+    const addBtn = document.getElementById('add-btn');
+    const addIcon = document.getElementById('add-icon');
+    const addMenu = document.getElementById('add-menu');
+    let autoCloseTimeout; // Menyimpan ID timer untuk auto-close
+
+    // Fungsi untuk membuka / menutup popup
+    function toggleMenu(event) {
+        event.stopPropagation(); // Mencegah event click langsung menutup menu
+
+        const isHidden = addMenu.classList.contains('hidden');
+        if (isHidden) {
+            addMenu.classList.remove('hidden');
+            addMenu.classList.add('show');
+
+            
+            // Memutar ikon '+' menjadi tanda silang 'x'
+            addIcon.style.transform = 'rotate(135deg)';
+
+            // Atur timer untuk menutup otomatis setelah 10 detik (10000ms)
+            clearTimeout(autoCloseTimeout); // Reset timer aktif sebelumnya (jika ada)
+            autoCloseTimeout = setTimeout(closeMenu, 10000);
+        } else {
+            closeMenu();
+        }
+    }
+
+    function closeMenu() {
+        addMenu.classList.remove('show');
+        addMenu.classList.add('hidden');
+        addIcon.style.transform = 'rotate(0deg)';
+
+        // Hapus timer jika ditutup secara manual sebelum 10 detik
+        clearTimeout(autoCloseTimeout);
+    }
+
+
+    addBtn.addEventListener('click', toggleMenu);
+
+    // Tutup popup secara otomatis saat klik di luar area popup
+    document.addEventListener('click', (event) => {
+        const isClickInside = addMenu.contains(event.target) || addBtn.contains(event.target);
+        if (!isClickInside) {
+            closeMenu();
+        }
+    });
+
+    // Tutup popup saat menekan tombol Escape
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+            closeMenu();
+        }
+    });
+</script>
+
+</body>
+</html>

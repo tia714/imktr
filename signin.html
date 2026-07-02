@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>SARPRAS FTI</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@400..900&family=League+Spartan&family=Outfit:wght@400;500;600;700;900&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+            extend: {
+                "colors": {
+                    "surface-container-high": "#d0e7ff",
+                    "on-primary-fixed": "#00223d",
+                    "on-tertiary-fixed-variant": "#b80900",
+                    "secondary-fixed-dim": "#ffd129",
+                    "on-secondary-fixed": "#00223d",
+                    "surface-dim": "#eff8ff",
+                    "secondary": "#ffd129",
+                    "primary-fixed-dim": "#ffd129",
+                    "secondary-container": "#ffd129",
+                    "primary": "#00223d",
+                    "on-secondary-fixed-variant": "#00223d",
+                    "on-primary-container": "#ffffff",
+                    "tertiary": "#b80900",
+                    "outline": "#737780",
+                    "on-background": "#00223d",
+                    "on-error": "#ffffff",
+                    "secondary-fixed": "#ffd129",
+                    "surface-tint": "#00223d",
+                    "on-tertiary-fixed": "#00223d",
+                    "on-surface-variant": "#00223d",
+                    "tertiary-fixed": "#b80900",
+                    "tertiary-container": "#b80900",
+                    "primary-container": "#00223d",
+                    "surface": "#ffffff",
+                    "inverse-surface": "#00223d",
+                    "on-error-container": "#b80900",
+                    "tertiary-fixed-dim": "#b80900",
+                    "inverse-primary": "#ffd129",
+                    "surface-variant": "#eff8ff",
+                    "surface-container-low": "#eff8ff",
+                    "on-surface": "#00223d",
+                    "error": "#b80900",
+                    "on-secondary": "#00223d",
+                    "outline-variant": "#d0e1f0",
+                    "on-secondary-container": "#00223d",
+                    "error-container": "#ffdad6",
+                    "surface-container-highest": "#d0e7ff",
+                    "inverse-on-surface": "#ffffff",
+                    "primary-fixed": "#00223d",
+                    "on-primary-fixed-variant": "#ffffff",
+                    "surface-container": "#eff8ff",
+                    "surface-bright": "#ffffff",
+                    "background": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary-container": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "on-tertiary": "#ffffff"
+                },
+                "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                },
+                "spacing": {
+                        "sm": "8px",
+                        "md": "16px",
+                        "edge-margin": "16px",
+                        "lg": "24px",
+                        "base": "4px",
+                        "xl": "32px",
+                        "xs": "4px",
+                        "gutter": "12px"
+                },
+                "fontFamily": {
+                        "headline-lg": ["Outfit"],
+                        "label-md": ["Alegreya"],
+                        "body-md": ["League Spartan"],
+                        "headline-lg-mobile": ["Outfit"],
+                        "label-sm": ["Alegreya"],
+                        "headline-md": ["Outfit"],
+                        "body-lg": ["League Spartan"]
+                },
+                "fontSize": {
+                        "headline-lg": ["30px", {"lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "label-sm": ["11px", {"lineHeight": "14px", "fontWeight": "500"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                }
+            },
+            },
+        }
+    </script>
+</head>
+
+<body class="bg-surface-container-low min-h-screen flex items-center justify-center p-6 text-on-background font-body-md">
+
+    <!-- SIGN IN -->
+    <form id="signin"
+        class="w-full max-w-sm bg-surface rounded-3xl shadow-xl border border-outline-variant p-8">
+
+        <div class="text-center mb-8">
+
+            <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-primary-container flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="w-8 h-8 text-white">
+
+                    <path stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M11.42 15.17 17.25 21A2.652 2.652 0 0 0 21 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 1 1-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 0 0 4.486-6.336l-3.276 3.277a3.004 3.004 0 0 1-2.25-2.25l3.276-3.276a4.5 4.5 0 0 0-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437 1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008Z" />
+                </svg>
+            </div>
+
+            <h1 class="text-headline-lg-mobile font-headline-lg-mobile text-primary">
+                Sign In
+            </h1>
+
+            <p class="text-on-surface-variant mt-2">
+                Enter your email and password
+            </p>
+
+        </div>
+
+        <div class="space-y-4">
+
+            <input
+                type="email"
+                id="email"
+                placeholder="Email"
+                required
+                class="w-full rounded-xl border border-outline-variant bg-surface-container-low px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary">
+
+            <input
+                type="password"
+                id="password"
+                placeholder="Password"
+                required
+                class="w-full rounded-xl border border-outline-variant bg-surface-container-low px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary">
+
+        </div>
+
+        <div class="flex justify-end mt-3">
+            <button type="button" onclick="showForgotPassword()" class="text-sm text-primary font-medium hover:underline">
+                Forgot password?
+            </button>
+        </div>
+
+        <!-- FORGOT PASSWORD MODAL -->
+        <div id="forgotModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4" onclick="closeForgotModal(event)">
+            <div class="bg-white rounded-2xl shadow-2xl w-full max-w-sm p-6 space-y-4" onclick="event.stopPropagation()">
+                <div class="flex items-center justify-between">
+                    <h2 class="font-['Outfit'] font-bold text-lg text-[#003765]">Reset Password</h2>
+                    <button type="button" onclick="closeForgotModal(event)" class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-surface-container-low">
+                        <span class="material-symbols-outlined text-outline text-sm">close</span>
+                    </button>
+                </div>
+
+                <p class="text-sm text-on-surface-variant">
+                    Enter your email and we’ll send you a reset link.
+                </p>
+
+                <div class="space-y-2">
+                    <label for="forgotEmail" class="text-xs font-bold uppercase tracking-wider text-[#003765]/60">Email</label>
+                    <input type="email" id="forgotEmail" placeholder="Email" required class="w-full rounded-xl border border-outline-variant bg-surface-container-low px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary">
+                </div>
+
+                <button type="button" onclick="sendResetLink()" class="w-full bg-secondary-container text-on-secondary-container py-3 rounded-xl font-semibold shadow-md hover:shadow-lg transition active:scale-95">
+                    Send reset link
+                </button>
+
+                <p id="forgotMessage" class="text-center text-sm text-on-surface-variant"></p>
+            </div>
+        </div>
+
+        <button
+            type="button"
+            onclick="login()"
+            class="mt-6 w-full bg-secondary-container text-on-secondary-container py-3 rounded-xl font-semibold shadow-md hover:shadow-lg transition active:scale-95">
+            SIGN IN
+        </button>
+
+        <!-- SEMENTARA SAMPE ADA DATABASE -->
+        <div class="mt-6">
+            <a href="home.html"
+            class="w-full border border-outline-variant text-[#003765] font-semibold py-3 rounded-xl hover:bg-surface-container-low active:scale-95 transition-all flex items-center justify-center">
+                Home
+            </a>
+        </div>
+
+        <p class="text-center text-sm text-on-surface-variant mt-6">
+            Don't have an account?
+
+            <button
+                type="button"
+                onclick="showSignup()"
+                class="text-primary font-semibold hover:underline">
+
+                Sign up
+
+            </button>
+        </p>
+
+    </form>
+
+    <!-- SIGN UP -->
+
+    <form id="signup"
+        class="hidden w-full max-w-sm bg-surface rounded-3xl shadow-xl border border-outline-variant p-8">
+
+        <div class="text-center mb-8">
+
+            <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-primary-container flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="w-8 h-8 text-white">
+
+                    <path stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M11.42 15.17 17.25 21A2.652 2.652 0 0 0 21 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 1 1-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 0 0 4.486-6.336l-3.276 3.277a3.004 3.004 0 0 1-2.25-2.25l3.276-3.276a4.5 4.5 0 0 0-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437 1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008Z" />
+                </svg>
+            </div>
+
+            <h1 class="text-headline-lg-mobile font-headline-lg-mobile text-primary">
+                Sign Up
+            </h1>
+
+            <p class="text-on-surface-variant mt-2">
+                Create your account
+            </p>
+
+        </div>
+
+        <div class="space-y-4">
+
+            <input
+                type="text"
+                id="fullname"
+                placeholder="Full Name"
+                required
+                class="w-full rounded-xl border border-outline-variant bg-surface-container-low px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary">
+
+            <input
+                type="text"
+                id="nim"
+                placeholder="NIM"
+                required
+                class="w-full rounded-xl border border-outline-variant bg-surface-container-low px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary">
+
+            <input
+                type="email"
+                id="signupEmail"
+                placeholder="Email"
+                required
+                class="w-full rounded-xl border border-outline-variant bg-surface-container-low px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary">
+
+            <input
+                type="password"
+                id="signupPassword"
+                placeholder="Password"
+                required
+                class="w-full rounded-xl border border-outline-variant bg-surface-container-low px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary">
+
+        </div>
+
+        <button
+            type="button"
+            onclick="register()"
+            class="mt-6 w-full bg-secondary-container text-on-secondary-container py-3 rounded-xl font-semibold shadow-md hover:shadow-lg transition active:scale-95">
+
+            SIGN UP
+
+        </button>
+
+        <p class="text-center text-sm text-on-surface-variant mt-6">
+            Already have an account?
+
+            <button
+                type="button"
+                onclick="showSignin()"
+                class="text-primary font-semibold hover:underline">
+
+                Sign In
+
+            </button>
+
+        </p>
+
+    </form>
+
+    <script src="signin.js"></script>
+
+</body>
+
+</html>

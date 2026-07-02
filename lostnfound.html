@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>SARPRAS FTI</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@400..900&family=League+Spartan&family=Outfit:wght@400;500;600;700;900&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+
+    <style>
+        /* Style popup and arrows */
+        .popup-arrow {
+            position: absolute;
+            bottom: -6px;
+            left: 50%;
+            transform: translateX(-50%) rotate(45deg);
+            width: 12px;
+            height: 12px;
+            background-color: inherit;
+            border-right: 1px solid rgba(0, 0, 0, 0.06);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+            z-index: -1;
+        }
+        #add-menu {
+            transform-origin: bottom center;
+            transition: opacity 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), 
+                        transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+                        visibility 0.25s;
+        }
+        #add-menu.show {
+            opacity: 1;
+            transform: translateX(-50%) scale(1);
+            visibility: visible;
+            pointer-events: auto;
+        }
+        #add-menu.hide {
+            opacity: 0;
+            transform: translateX(-50%) scale(0.9);
+            visibility: hidden;
+            pointer-events: none;
+        }
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        /* Hide scrollbar for IE, Edge and Firefox */
+        .hide-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+    </style>
+
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+            extend: {
+                "colors": {
+                    "surface-container-high": "#edf4ff",
+                    "on-primary-fixed": "#001221",
+                    "on-tertiary-fixed-variant": "#c80a00",
+                    "secondary-fixed-dim": "#ffb01f",
+                    "on-secondary-fixed": "#001221",
+                    "surface-dim": "#d3e4ff",
+                    "secondary": "#ffb01f",
+                    "primary-fixed-dim": "#ffb01f",
+                    "secondary-container": "#ffb01f",
+                    "primary": "#003765",
+                    "on-secondary-fixed-variant": "#001221",
+                    "on-primary-container": "#ffffff",
+                    "tertiary": "#c80a00",
+                    "outline": "#737780",
+                    "on-background": "#001221",
+                    "on-error": "#ffffff",
+                    "secondary-fixed": "#ffb01f",
+                    "surface-tint": "#003765",
+                    "on-tertiary-fixed": "#001221",
+                    "on-surface-variant": "#001221",
+                    "tertiary-fixed": "#c80a00",
+                    "tertiary-container": "#c80a00",
+                    "primary-container": "#003765",
+                    "surface": "#f7f9ff",
+                    "inverse-surface": "#001221",
+                    "on-error-container": "#93000a",
+                    "tertiary-fixed-dim": "#c80a00",
+                    "inverse-primary": "#ffb01f",
+                    "surface-variant": "#d3e4ff",
+                    "surface-container-low": "#f0f5ff",
+                    "on-surface": "#001221",
+                    "error": "#ba1a1a",
+                    "on-secondary": "#001221",
+                    "outline-variant": "#c3c6d0",
+                    "on-secondary-container": "#001221",
+                    "error-container": "#ffdad6",
+                    "surface-container-highest": "#d3e4ff",
+                    "inverse-on-surface": "#ffffff",
+                    "primary-fixed": "#003765",
+                    "on-primary-fixed-variant": "#ffffff",
+                    "surface-container": "#e2efff",
+                    "surface-bright": "#ffffff",
+                    "background": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary-container": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "on-tertiary": "#ffffff"
+                },
+                "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                },
+                "spacing": {
+                        "sm": "8px",
+                        "md": "16px",
+                        "edge-margin": "16px",
+                        "lg": "24px",
+                        "base": "4px",
+                        "xl": "32px",
+                        "xs": "4px",
+                        "gutter": "12px"
+                },
+                "fontFamily": {
+                        "headline-lg": ["Outfit"],
+                        "label-md": ["Alegreya"],
+                        "body-md": ["League Spartan"],
+                        "headline-lg-mobile": ["Outfit"],
+                        "label-sm": ["Alegreya"],
+                        "headline-md": ["Outfit"],
+                        "body-lg": ["League Spartan"]
+                },
+                "fontSize": {
+                        "headline-lg": ["30px", {"lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "label-sm": ["11px", {"lineHeight": "14px", "fontWeight": "500"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                }
+            },
+            },
+        }
+    </script>
+</head>
+
+<body class="bg-background text-[#00223d] font-body-md selection:bg-[#eff8ff] selection:text-[#00223d] overflow-x-hidden">
+    <main class="pt-4 pb-28 px-edge-margin space-y-6">
+        
+        <!-- Header: Back Button, Title, Notification Bell -->
+        <header class="flex items-center justify-between py-2 relative">
+            <a href="home.html" class="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center text-[#00223d] active:scale-95 transition-all">
+                <span class="material-symbols-outlined text-xl">arrow_back</span>
+            </a>
+            <h1 id="page-title" class="text-xl font-bold font-['Outfit'] text-[#00223d] absolute left-1/2 -translate-x-1/2 whitespace-nowrap">
+                Lost & Found
+            </h1>
+            <button class="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center text-[#00223d] active:scale-95 transition-all relative">
+                <span class="material-symbols-outlined text-xl">notifications</span>
+                <span class="absolute top-3 right-3 w-1.5 h-1.5 bg-[#b80900] rounded-full"></span>
+            </button>
+        </header>
+
+        <!-- Search and Filter Section -->
+        <div class="space-y-4 w-full">
+            <!-- Search Bar -->
+            <div class="relative w-full max-w-3xl mx-auto">
+
+                <input class="w-full bg-surface-container-low border border-outline-variant rounded-xl pl-10 pr-4 py-3 font-body-md text-body-md focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" placeholder="Search items..." type="text" id="search-input">
+                <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-primary">search</span>
+            </div>
+
+            <!-- Filter Chips Wrapper -->
+                <div class="relative w-full max-w-3xl mx-auto flex items-center justify-between gap-3">
+
+                <!-- Type filters -->
+                <div class="flex flex-wrap gap-sm">
+
+                    <button id="filter-all" onclick="filterType('all')" class="flex items-center gap-1 px-4 py-2 bg-primary text-white rounded-full font-label-md text-label-md whitespace-nowrap active:scale-95 transition-transform shadow-sm">
+                        All
+                    </button>
+                    <button id="filter-lost" onclick="filterType('lost')" class="flex items-center gap-1 px-4 py-2 bg-surface-container-high text-on-surface-variant rounded-full font-label-md text-label-md border border-outline-variant whitespace-nowrap hover:bg-surface-container-highest active:scale-95 transition-all">
+                        <span class="material-symbols-outlined text-[18px]">report_problem</span>
+                        Lost
+                    </button>
+                    <button id="filter-found" onclick="filterType('found')" class="flex items-center gap-1 px-4 py-2 bg-surface-container-high text-on-surface-variant rounded-full font-label-md text-label-md border border-outline-variant whitespace-nowrap hover:bg-surface-container-highest active:scale-95 transition-all">
+                        <span class="material-symbols-outlined text-[18px]">check_circle</span>
+                        Found
+                    </button>
+                </div>
+
+                <div class="w-px h-6 bg-outline-variant self-center mx-1 flex-shrink-0"></div>
+
+                <!-- Category Filter Button & Popup -->
+                <div class="relative">
+                    <button id="category-filter-btn" onclick="toggleCategoryPopup(event)" class="flex items-center justify-center w-10 h-10 bg-surface-container-high text-on-surface-variant rounded-full border border-outline-variant hover:bg-surface-container-highest active:scale-95 transition-all">
+                        <span class="material-symbols-outlined text-xl">filter_list</span>
+                    </button>
+                    
+                    <!-- Category Popup -->
+                    <div id="category-popup" class="hidden absolute right-0 mt-2 bg-white rounded-xl shadow-lg border border-outline-variant/40 p-4 w-48 z-50 space-y-3">
+                        <div class="flex items-center gap-2">
+                            <input type="checkbox" id="cat-all" onchange="toggleAllCategories(this)" class="rounded text-primary focus:ring-primary border-outline-variant w-4 h-4 cursor-pointer" checked>
+                            <label for="cat-all" class="font-body-md text-sm text-[#00223d] font-semibold cursor-pointer">All Categories</label>
+                        </div>
+                        <div class="h-[1px] bg-gray-100 my-1"></div>
+                        <div class="flex items-center gap-2">
+                            <input type="checkbox" id="cat-electronics" value="Electronics" onchange="categoryCheckboxChanged()" class="category-checkbox rounded text-primary focus:ring-primary border-outline-variant w-4 h-4 cursor-pointer" checked>
+                            <label for="cat-electronics" class="font-body-md text-sm text-[#00223d] cursor-pointer">Electronics</label>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <input type="checkbox" id="cat-personal" value="Personal Items" onchange="categoryCheckboxChanged()" class="category-checkbox rounded text-primary focus:ring-primary border-outline-variant w-4 h-4 cursor-pointer" checked>
+                            <label for="cat-personal" class="font-body-md text-sm text-[#00223d] cursor-pointer">Personal Items</label>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <input type="checkbox" id="cat-books" value="Books" onchange="categoryCheckboxChanged()" class="category-checkbox rounded text-primary focus:ring-primary border-outline-variant w-4 h-4 cursor-pointer" checked>
+                            <label for="cat-books" class="font-body-md text-sm text-[#00223d] cursor-pointer">Books</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Feed Grid -->
+        <main class="grid grid-cols-2 gap-6 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 max-w-6xl mx-auto px-0">
+
+            
+            <!-- Card 1: MacBook USB-C Charger -->
+            <div onclick="openDetailsModal('item-1')" class="feed-card bg-white border border-outline-variant/40 rounded-2xl shadow-sm overflow-hidden flex flex-col hover:shadow-md hover:scale-[1.01] active:scale-[0.99] transition-all duration-200 cursor-pointer group" data-title="MacBook USB-C Charger" data-type="found" data-category="Electronics">
+                <div class="relative h-40 w-full overflow-hidden bg-gray-100">
+                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwf3puZhObx6sIQFrGelXoDZ5JfMJe38dSYC1vHZ01WWFz8pp5MdKpwvS218WvOSWt9ZLiagRoatBl_K878zxo8XKzIBglqcjbdoT4lRuJI5uO0xtX05JxctZWm83T4ylo-iwECQ7ogPl9e44BObpaOK5TdFhGv1LHvvCnR5A5Rql_Y6Ve_C_5crB4AA7PJwUC_94Ey4zO9_KrUH_UmHPInsjF-vUWlGpjCjrWBaFRr3atWsW_hkO4JxT4EN96laJ8G3Ne4BfPSlEc" alt="MacBook USB-C Charger">
+                    <div class="absolute top-3 right-3 bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full font-label-sm text-xs flex items-center gap-1 shadow-sm font-bold">
+                        <span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                        FOUND
+                    </div>
+                </div>
+                <div class="p-4 flex flex-col flex-grow">
+                    <span class="font-label-md text-xs font-bold text-primary uppercase tracking-wider">Electronics</span>
+                    <h3 class="font-bold font-['Outfit'] text-base text-[#00223d] truncate mt-1">MacBook USB-C Charger</h3>
+                    <div class="flex items-start gap-1 mt-1 text-[#00223d]/70">
+                        <span class="material-symbols-outlined text-base">location_on</span>
+                        <p class="font-body-md text-sm">Room 302, Faculty of Arts</p>
+                    </div>
+                    <div class="mt-auto pt-4 flex items-center justify-between border-t border-gray-100">
+                        <span class="font-label-sm text-xs text-[#00223d]/50">Today, 11:30 AM</span>
+                        <button class="text-primary font-bold text-sm flex items-center gap-0.5 hover:underline">
+                            Details <span class="material-symbols-outlined text-base">chevron_right</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2: Blue Sony Headphones -->
+            <div onclick="openDetailsModal('item-2')" class="feed-card bg-white border border-outline-variant/40 rounded-2xl shadow-sm overflow-hidden flex flex-col hover:shadow-md hover:scale-[1.01] active:scale-[0.99] transition-all duration-200 cursor-pointer group" data-title="Blue Sony Headphones" data-type="lost" data-category="Electronics">
+                <div class="relative h-40 w-full overflow-hidden bg-gray-100">
+                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCO2d5hE7KtHGgsAVO31dHC-RAnZy-n9KZg_nHXSRC3M5jekSqjlL7U_nJ5Tj8JLP1i2vaD9v6kJVuiynacvUitVtnckdWgDI0gtCHjL6t0JM7yvMaPHM8OMT8Qi8PE-dkQUZzgIl0Rq6nMudlXDwy97zUy7yl8vBNxSVZwk3O95aTgXjD8n6NVB_PPMCVpPr9UyKsABNyGbWGWkT83PhfOYZQw9wDHpkWVdocuskjIKwe26qVmgFxmQ6quDz_ulK33HYXhiV0txe0e" alt="Blue Sony Headphones">
+                    <div class="absolute top-3 right-3 bg-[#ffdad6] text-[#ba1a1a] px-3 py-1 rounded-full font-label-sm text-xs flex items-center gap-1 shadow-sm font-bold">
+                        <span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">report_problem</span>
+                        LOST
+                    </div>
+                </div>
+                <div class="p-4 flex flex-col flex-grow">
+                    <span class="font-label-md text-xs font-bold text-primary uppercase tracking-wider">Electronics</span>
+                    <h3 class="font-bold font-['Outfit'] text-base text-[#00223d] truncate mt-1">Blue Sony Headphones</h3>
+                    <div class="flex items-start gap-1 mt-1 text-[#00223d]/70">
+                        <span class="material-symbols-outlined text-base">location_on</span>
+                        <p class="font-body-md text-sm">Central Library, 2nd Floor</p>
+                    </div>
+                    <div class="mt-auto pt-4 flex items-center justify-between border-t border-gray-100">
+                        <span class="font-label-sm text-xs text-[#00223d]/50">Yesterday, 4:15 PM</span>
+                        <button class="text-primary font-bold text-sm flex items-center gap-0.5 hover:underline">
+                            Details <span class="material-symbols-outlined text-base">chevron_right</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3: Set of 3 Silver Keys -->
+            <div onclick="openDetailsModal('item-3')" class="feed-card bg-white border border-outline-variant/40 rounded-2xl shadow-sm overflow-hidden flex flex-col hover:shadow-md hover:scale-[1.01] active:scale-[0.99] transition-all duration-200 cursor-pointer group" data-title="Set of 3 Silver Keys" data-type="found" data-category="Personal Items">
+                <div class="relative h-40 w-full overflow-hidden bg-surface-container-low flex items-center justify-center">
+                    <span class="material-symbols-outlined text-[#00223d]/40 text-[64px] group-hover:scale-110 transition-transform">key</span>
+                    <div class="absolute top-3 right-3 bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full font-label-sm text-xs flex items-center gap-1 shadow-sm font-bold">
+                        <span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                        FOUND
+                    </div>
+                </div>
+                <div class="p-4 flex flex-col flex-grow">
+                    <span class="font-label-md text-xs font-bold text-primary uppercase tracking-wider">Personal Items</span>
+                    <h3 class="font-bold font-['Outfit'] text-base text-[#00223d] truncate mt-1">Set of 3 Silver Keys</h3>
+                    <div class="flex items-start gap-1 mt-1 text-[#00223d]/70">
+                        <span class="material-symbols-outlined text-base">location_on</span>
+                        <p class="font-body-md text-sm">Student Union Cafeteria</p>
+                    </div>
+                    <div class="mt-auto pt-4 flex items-center justify-between border-t border-gray-100">
+                        <span class="font-label-sm text-xs text-[#00223d]/50">Today, 9:30 AM</span>
+                        <button class="text-primary font-bold text-sm flex items-center gap-0.5 hover:underline">
+                            Details <span class="material-symbols-outlined text-base">chevron_right</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 4: Organic Chemistry Textbook -->
+            <div onclick="openDetailsModal('item-4')" class="feed-card bg-white border border-outline-variant/40 rounded-2xl shadow-sm overflow-hidden flex flex-col hover:shadow-md hover:scale-[1.01] active:scale-[0.99] transition-all duration-200 cursor-pointer group" data-title="Organic Chemistry Textbook" data-type="lost" data-category="Books">
+                <div class="relative h-40 w-full overflow-hidden bg-gray-100">
+                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA71hqXENK_XYTTF-kxKq9t0WhICh7rWBUcSGT2Gm55YFDRY05e2z8PQX7ar92VT8uRrg-J9ACI1uM8IFWk4PnvaIwbNDnM_WSU2F0xirixHnxTMu5655ik4T4rsEFs7JaEnWRVkA7C7vpNeqv1KaW1_1z9yETawDPQswxHem1jDNRHDOEkBhdMFpxeR1CGwqxkMHWsT8kS2N8Ioia3bopkPQ6JkHZOe0uGteFfr0vJF3eO6OLp-WQrfyWnhFqCktuMt-oCo4jOjaLG" alt="Organic Chemistry Textbook">
+                    <div class="absolute top-3 right-3 bg-[#ffdad6] text-[#ba1a1a] px-3 py-1 rounded-full font-label-sm text-xs flex items-center gap-1 shadow-sm font-bold">
+                        <span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">report_problem</span>
+                        LOST
+                    </div>
+                </div>
+                <div class="p-4 flex flex-col flex-grow">
+                    <span class="font-label-md text-xs font-bold text-primary uppercase tracking-wider">Books</span>
+                    <h3 class="font-bold font-['Outfit'] text-base text-[#00223d] truncate mt-1">Organic Chemistry Textbook</h3>
+                    <div class="flex items-start gap-1 mt-1 text-[#00223d]/70">
+                        <span class="material-symbols-outlined text-base">location_on</span>
+                        <p class="font-body-md text-sm">Engineering Hall A, Room 102</p>
+                    </div>
+                    <div class="mt-auto pt-4 flex items-center justify-between border-t border-gray-100">
+                        <span class="font-label-sm text-xs text-[#00223d]/50">Oct 24, 2023</span>
+                        <button class="text-primary font-bold text-sm flex items-center gap-0.5 hover:underline">
+                            Details <span class="material-symbols-outlined text-base">chevron_right</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+        </main>
+    </main>
+
+    <!-- Details & Claim Modal -->
+    <div id="details-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="bg-white rounded-2xl max-w-md w-full max-h-[90vh] overflow-y-auto shadow-2xl transform scale-95 transition-transform duration-300 relative flex flex-col">
+            <!-- Close Button -->
+            <button onclick="closeDetailsModal()" class="absolute top-4 right-4 z-10 w-8 h-8 rounded-full bg-black/40 flex items-center justify-center text-white hover:bg-black/60 transition-colors">
+                <span class="material-symbols-outlined text-lg">close</span>
+            </button>
+
+            <!-- Image header -->
+            <div class="relative h-48 w-full bg-gray-100 flex-shrink-0 flex items-center justify-center">
+                <img id="modal-item-img" class="w-full h-full object-cover" src="" alt="Item Image">
+                <div id="modal-item-img-placeholder" class="hidden flex items-center justify-center w-full h-full bg-surface-container-high">
+                    <span class="material-symbols-outlined text-[#00223d]/40 text-[80px]">key</span>
+                </div>
+                <div id="modal-item-status" class="absolute top-4 left-4 px-3 py-1 rounded-full font-label-sm text-xs flex items-center gap-1 shadow-sm font-bold">
+                    <!-- Status badge dynamically set -->
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="p-6 space-y-4 flex-grow">
+                <div>
+                    <span id="modal-item-category" class="font-label-md text-xs font-bold text-primary uppercase tracking-wider">Category</span>
+                    <h2 id="modal-item-name" class="text-xl font-bold font-['Outfit'] text-[#00223d] mt-1">Item Name</h2>
+                </div>
+
+                <!-- Details list -->
+                <div class="space-y-3 bg-surface-container-low p-4 rounded-xl border border-outline-variant/30">
+                    <div class="flex gap-3">
+                        <span class="material-symbols-outlined text-primary">location_on</span>
+                        <div>
+                            <p class="text-xs font-semibold text-[#00223d]/70">Location</p>
+                            <p id="modal-item-location" class="font-body-md text-sm text-[#00223d]">Room 302, Faculty of Arts</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-3">
+                        <span class="material-symbols-outlined text-primary">calendar_month</span>
+                        <div>
+                            <p class="text-xs font-semibold text-[#00223d]/70">Date & Time</p>
+                            <p id="modal-item-datetime" class="font-body-md text-sm text-[#00223d]">2 hours ago</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Description -->
+                <div class="space-y-1">
+                    <h4 class="font-semibold text-sm text-[#00223d]">Description</h4>
+                    <p id="modal-item-desc" class="font-body-md text-sm text-[#00223d]/80 leading-relaxed">
+                        Item description goes here...
+                    </p>
+                </div>
+
+                <!-- Claim Section Toggle -->
+                <div id="modal-action-section" class="pt-2">
+                    <button onclick="showClaimForm()" id="modal-action-btn" class="w-full bg-[#003765] hover:bg-[#003765]/90 text-white font-semibold py-3 rounded-xl shadow-md transition-all active:scale-[0.99] flex items-center justify-center gap-2 text-sm">
+                        <span class="material-symbols-outlined">verified</span>
+                        <span id="modal-action-btn-text">Claim Item</span>
+                    </button>
+                </div>
+
+                <!-- Claim Form (Initially Hidden) -->
+                <form id="claim-form" onsubmit="submitClaim(event)" class="hidden space-y-4 pt-2 border-t border-gray-100">
+                    <h4 class="font-bold text-sm text-[#00223d]" id="claim-form-title">Verification Claim</h4>
+                    
+                    <div class="space-y-3">
+                        <div class="flex flex-col gap-1">
+                            <label class="text-xs font-semibold text-[#00223d]/70" for="claim-name">Your Full Name</label>
+                            <input class="w-full bg-surface-container-low border border-outline-variant rounded-lg p-2.5 font-body-md text-sm focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" id="claim-name" placeholder="e.g. John Doe" type="text" required>
+                        </div>
+                        <div class="flex flex-col gap-1">
+                            <label class="text-xs font-semibold text-[#00223d]/70" for="claim-nim">Student ID (NIM)</label>
+                            <input class="w-full bg-surface-container-low border border-outline-variant rounded-lg p-2.5 font-body-md text-sm focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" id="claim-nim" placeholder="e.g. 71220800" type="text" required>
+                        </div>
+                        <div class="flex flex-col gap-1">
+                            <label class="text-xs font-semibold text-[#00223d]/70" for="claim-proof" id="claim-proof-label">Proof of Ownership / Message</label>
+                            <textarea class="w-full bg-surface-container-low border border-outline-variant rounded-lg p-2.5 font-body-md text-sm focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all resize-none" id="claim-proof" placeholder="Provide proof or details..." rows="3" required></textarea>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-2">
+                        <button type="button" onclick="hideClaimForm()" class="flex-1 bg-gray-100 hover:bg-gray-200 text-[#00223d] font-semibold py-2.5 rounded-lg text-sm transition-all active:scale-[0.99]">
+                            Cancel
+                        </button>
+                        <button type="submit" class="flex-1 bg-[#ffb01f] hover:bg-[#ffb01f]/90 text-[#001221] font-semibold py-2.5 rounded-lg text-sm shadow-sm transition-all active:scale-[0.99]">
+                            Submit Claim
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="success-modal" class="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/60 opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="bg-white rounded-2xl max-w-xs w-full p-6 shadow-2xl text-center transform scale-95 transition-transform duration-300 flex flex-col items-center">
+            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center text-green-500 mb-4 animate-bounce">
+                <span class="material-symbols-outlined text-4xl">check_circle</span>
+            </div>
+            <h3 class="text-lg font-bold font-['Outfit'] text-[#00223d]">Submission Success!</h3>
+            <p class="font-body-md text-sm text-[#00223d]/70 mt-2 leading-relaxed">
+                Your verification claim has been successfully submitted. SARPRAS Admin will contact you soon.
+            </p>
+            <button onclick="closeSuccessModal()" class="mt-5 w-full bg-[#003765] hover:bg-[#003765]/90 text-white font-semibold py-2.5 rounded-xl transition-all active:scale-[0.99]">
+                Close
+            </button>
+        </div>
+    </div>
+
+    <!-- Post New Report FAB -->
+    <a href="reportlost.html" class="fixed bottom-20 right-edge-margin bg-secondary-container text-on-secondary-container h-14 w-14 rounded-full shadow-lg flex items-center justify-center hover:bg-secondary-fixed active:scale-95 transition-all z-40 group" style="bottom: 5.5rem;">
+        <span class="material-symbols-outlined group-hover:rotate-90 transition-transform duration-300 text-2xl">
+            add
+        </span>
+    </a>
+
+    <!-- Bottom Navigation Bar -->
+    <nav class="fixed bottom-0 w-full z-50 bg-white border-t border-outline-variant shadow-lg flex justify-around items-center h-16 pb-safe px-2">
+        <a href="home.html" class="flex flex-col items-center justify-center text-[#00223d] font-bold transition-all active:scale-90 duration-200">
+            <span class="material-symbols-outlined" data-icon="home">home</span>
+            <span class="font-['Outfit'] text-xs mt-0.5">Home</span>
+        </a>
+        <a href="calendar.html" class="flex flex-col items-center justify-center text-[#00223d] hover:text-[#00223d]/80 transition-all active:scale-90 duration-200">
+            <span class="material-symbols-outlined" data-icon="calendar_month">calendar_month</span>
+            <span class="font-['Outfit'] text-xs mt-0.5">Schedule</span>
+        </a>
+        <!-- Wrapper dengan class 'relative' agar koordinat absolute popup presisi di atas tombol -->
+        <div class="relative -mt-8">
+            <!-- Tombol Add -->
+            <button id="add-btn" class="w-14 h-14 bg-[#00223d] text-white rounded-full flex items-center justify-center shadow-xl border-4 border-white active:scale-90 hover:scale-105 transition-all duration-200">
+                <span class="material-symbols-outlined text-2xl transition-transform duration-200" id="add-icon">add</span>
+            </button>
+
+            <!-- Popup Menu (Gaya Gelembung Pesan / Tooltip) -->
+            <div id="add-menu" class="hidden absolute bottom-full left-1/2 -translate-x-1/2 mb-4 bg-white dark:bg-zinc-800 rounded-2xl shadow-[0_10px_35px_-5px_rgba(0,0,0,0.15)] dark:shadow-[0_10px_35px_-5px_rgba(0,0,0,0.3)] border border-gray-100 dark:border-zinc-700/80 p-2 w-56 flex flex-col gap-1 z-50">
+                <!-- Segitiga Penunjuk -->
+                <div class="popup-arrow bg-white dark:bg-zinc-800"></div>
+
+                <!-- Opsi 1: Pinjam Ruang -->
+                <a href="pinjam.html?tab=ruang" class="flex items-center gap-3 px-3 py-2 rounded-xl text-[#00223d] hover:bg-gray-100 dark:hover:bg-zinc-700/60 transition-colors active:scale-98 duration-100">
+                    <span class="material-symbols-outlined text-blue-500 dark:text-blue-400 text-xl">meeting_room</span>
+                    <span class="text-sm font-medium font-['Outfit']">Pinjam Ruang</span>
+                </a>
+
+                <!-- Opsi 2: Pinjam Alat -->
+                <a href="pinjam.html?tab=alat" class="flex items-center gap-3 px-3 py-2 rounded-xl text-[#00223d] hover:bg-gray-100 dark:hover:bg-zinc-700/60 transition-colors active:scale-98 duration-100">
+                    <span class="material-symbols-outlined text-emerald-500 dark:text-emerald-400 text-xl">construction</span>
+                    <span class="text-sm font-medium font-['Outfit']">Pinjam Alat</span>
+                </a>
+
+                <!-- Opsi 3: Report Missing Item -->
+                <a href="reportlost.html" class="flex items-center gap-3 px-3 py-2 rounded-xl text-[#00223d] hover:bg-gray-100 dark:hover:bg-zinc-700/60 transition-colors active:scale-98 duration-100">
+                    <span class="material-symbols-outlined text-amber-500 dark:text-amber-400 text-xl">search_off</span>
+                    <span class="text-sm font-medium font-['Outfit']">Report Missing Item</span>
+                </a>
+
+                <!-- Opsi 4: Report Found Item -->
+                <a href="lostnfound.html" class="flex items-center gap-3 px-3 py-2 rounded-xl text-[#00223d] hover:bg-gray-100 dark:hover:bg-zinc-700/60 transition-colors active:scale-98 duration-100">
+                    <span class="material-symbols-outlined text-indigo-500 dark:text-indigo-400 text-xl">inventory_2</span>
+                    <span class="text-sm font-medium font-['Outfit']">Report Found Item</span>
+                </a>
+
+                <!-- Garis Pembatas (Divider) -->
+                <div class="h-[1px] bg-gray-100 dark:bg-zinc-700/50 my-1"></div>
+
+                <!-- Opsi 5: Emergency Call (Diberi warna merah sebagai prioritas/peringatan) -->
+                <a href="tel:112" class="flex items-center gap-3 px-3 py-2 rounded-xl text-[#b80900] hover:bg-red-50 dark:hover:bg-red-950/30 transition-colors active:scale-98 duration-100">
+                    <span class="material-symbols-outlined text-[#b80900] text-xl">emergency</span>
+                    <span class="text-sm font-semibold font-['Outfit']">Emergency Call</span>
+                </a>
+            </div>
+        </div>
+        <a href="#" class="flex flex-col items-center justify-center text-[#00223d] hover:text-[#00223d]/80 transition-all active:scale-90 duration-200">
+            <span class="material-symbols-outlined" data-icon="history">history</span>
+            <span class="font-['Outfit'] text-xs mt-0.5">History</span>
+        </a>
+        <a href="profile.html" class="flex flex-col items-center justify-center text-[#00223d] hover:text-[#00223d]/80 transition-all active:scale-90 duration-200">
+            <span class="material-symbols-outlined" data-icon="person">person</span>
+            <span class="font-['Outfit'] text-xs mt-0.5">Profile</span>
+        </a>
+    </nav>
+
+    <!-- Visual Polish: Subtle Background Noise Texture -->
+    <div class="fixed inset-0 pointer-events-none opacity-[0.02] mix-blend-overlay z-50">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <filter id="noiseFilter">
+                <feTurbulence baseFrequency="0.65" numOctaves="3" stitchTiles="stitch" type="fractalNoise"></feTurbulence>
+            </filter>
+            <rect filter="url(#noiseFilter)" height="100%" width="100%"></rect>
+        </svg>
+    </div>
+
+    <!-- JavaScript code -->
+    <script>
+        // Micro-interaction for buttons (vibration on mobile)
+        document.querySelectorAll("button, a, .feed-card").forEach((el) => {
+            el.addEventListener("click", () => {
+                if (window.navigator.vibrate) {
+                    window.navigator.vibrate(5);
+                }
+            });
+        });
+
+        // Items Database
+        const itemsData = {
+            "item-1": {
+                id: "item-1",
+                title: "MacBook USB-C Charger",
+                category: "Electronics",
+                status: "FOUND",
+                location: "Room 302, Faculty of Arts",
+                datetime: "Today, 11:30 AM",
+                desc: "Original Apple 96W USB-C power adapter found on a wooden desk. Comes with a white charging cable. Very clean condition.",
+                img: "https://lh3.googleusercontent.com/aida-public/AB6AXuAwf3puZhObx6sIQFrGelXoDZ5JfMJe38dSYC1vHZ01WWFz8pp5MdKpwvS218WvOSWt9ZLiagRoatBl_K878zxo8XKzIBglqcjbdoT4lRuJI5uO0xtX05JxctZWm83T4ylo-iwECQ7ogPl9e44BObpaOK5TdFhGv1LHvvCnR5A5Rql_Y6Ve_C_5crB4AA7PJwUC_94Ey4zO9_KrUH_UmHPInsjF-vUWlGpjCjrWBaFRr3atWsW_hkO4JxT4EN96laJ8G3Ne4BfPSlEc"
+            },
+            "item-2": {
+                id: "item-2",
+                title: "Blue Sony Headphones",
+                category: "Electronics",
+                status: "LOST",
+                location: "Central Library, 2nd Floor",
+                datetime: "Yesterday, 4:15 PM",
+                desc: "Sony WH-1000XM4 headphones, blue color. Left on a bench near the window on the 2nd floor. It has a small scratch on the left ear cup.",
+                img: "https://lh3.googleusercontent.com/aida-public/AB6AXuCO2d5hE7KtHGgsAVO31dHC-RAnZy-n9KZg_nHXSRC3M5jekSqjlL7U_nJ5Tj8JLP1i2vaD9v6kJVuiynacvUitVtnckdWgDI0gtCHjL6t0JM7yvMaPHM8OMT8Qi8PE-dkQUZzgIl0Rq6nMudlXDwy97zUy7yl8vBNxSVZwk3O95aTgXjD8n6NVB_PPMCVpPr9UyKsABNyGbWGWkT83PhfOYZQw9wDHpkWVdocuskjIKwe26qVmgFxmQ6quDz_ulK33HYXhiV0txe0e"
+            },
+            "item-3": {
+                id: "item-3",
+                title: "Set of 3 Silver Keys",
+                category: "Personal Items",
+                status: "FOUND",
+                location: "Student Union Cafeteria",
+                datetime: "Today, 9:30 AM",
+                desc: "A keychain with three silver door keys and a small rubber astronaut keychain. Found on one of the tables in the cafeteria.",
+                img: "key"
+            },
+            "item-4": {
+                id: "item-4",
+                title: "Organic Chemistry Textbook",
+                category: "Books",
+                status: "LOST",
+                location: "Engineering Hall A, Room 102",
+                datetime: "Oct 24, 2023",
+                desc: "Wade & Simek Organic Chemistry (9th Edition) hardcover textbook. My name is written on the inner front cover.",
+                img: "https://lh3.googleusercontent.com/aida-public/AB6AXuA71hqXENK_XYTTF-kxKq9t0WhICh7rWBUcSGT2Gm55YFDRY05e2z8PQX7ar92VT8uRrg-J9ACI1uM8IFWk4PnvaIwbNDnM_WSU2F0xirixHnxTMu5655ik4T4rsEFs7JaEnWRVkA7C7vpNeqv1KaW1_1z9yETawDPQswxHem1jDNRHDOEkBhdMFpxeR1CGwqxkMHWsT8kS2N8Ioia3bopkPQ6JkHZOe0uGteFfr0vJF3eO6OLp-WQrfyWnhFqCktuMt-oCo4jOjaLG"
+            }
+        };
+
+        // Filter Logic
+        let activeType = 'all';
+        let categoryPopupTimeout;
+
+        function filterType(type) {
+            activeType = type;
+            
+            // Update button styles
+            const btnAll = document.getElementById('filter-all');
+            const btnLost = document.getElementById('filter-lost');
+            const btnFound = document.getElementById('filter-found');
+            
+            const activeClass = "flex items-center gap-1 px-4 py-2 bg-primary text-white rounded-full font-label-md text-label-md whitespace-nowrap active:scale-95 transition-transform shadow-sm";
+            const inactiveClass = "flex items-center gap-1 px-4 py-2 bg-surface-container-high text-on-surface-variant rounded-full font-label-md text-label-md border border-outline-variant whitespace-nowrap hover:bg-surface-container-highest active:scale-95 transition-all";
+            
+            btnAll.className = (type === 'all') ? activeClass : inactiveClass;
+            btnLost.className = (type === 'lost') ? activeClass : inactiveClass;
+            btnFound.className = (type === 'found') ? activeClass : inactiveClass;
+
+            updateFeed();
+        }
+
+        // Category Filter Popup Logic
+        function toggleCategoryPopup(event) {
+            if (event) event.stopPropagation();
+            const popup = document.getElementById('category-popup');
+            const isHidden = popup.classList.contains('hidden');
+            
+            if (isHidden) {
+                popup.classList.remove('hidden');
+                resetCategoryPopupTimer();
+            } else {
+                closeCategoryPopup();
+            }
+        }
+
+        function closeCategoryPopup() {
+            const popup = document.getElementById('category-popup');
+            if (popup) {
+                popup.classList.add('hidden');
+            }
+            clearTimeout(categoryPopupTimeout);
+        }
+
+        function resetCategoryPopupTimer() {
+            clearTimeout(categoryPopupTimeout);
+            categoryPopupTimeout = setTimeout(() => {
+                closeCategoryPopup();
+            }, 5000);
+        }
+
+        // Reset timer when user clicks inside the popup
+        document.getElementById('category-popup').addEventListener('click', (e) => {
+            resetCategoryPopupTimer();
+        });
+
+        function toggleAllCategories(master) {
+            const checkboxes = document.querySelectorAll('.category-checkbox');
+            checkboxes.forEach(cb => {
+                cb.checked = master.checked;
+            });
+            updateFeed();
+        }
+
+        function categoryCheckboxChanged() {
+            const checkboxes = document.querySelectorAll('.category-checkbox');
+            const master = document.getElementById('cat-all');
+            
+            const allChecked = Array.from(checkboxes).every(cb => cb.checked);
+            const noneChecked = Array.from(checkboxes).every(cb => !cb.checked);
+            
+            if (allChecked) {
+                master.checked = true;
+                master.indeterminate = false;
+            } else if (noneChecked) {
+                master.checked = false;
+                master.indeterminate = false;
+            } else {
+                master.checked = false;
+                master.indeterminate = true;
+            }
+            
+            updateFeed();
+        }
+
+        function updateCategoryButtonState() {
+            const btn = document.getElementById('category-filter-btn');
+            const isAllChecked = document.getElementById('cat-all').checked;
+            const checkedBoxes = document.querySelectorAll('.category-checkbox:checked');
+            const isNoneChecked = checkedBoxes.length === 0;
+            
+            if (!isAllChecked && !isNoneChecked) {
+                // Highlight filter button if a sub-selection is active
+                btn.classList.remove('bg-surface-container-high', 'text-on-surface-variant');
+                btn.classList.add('bg-primary', 'text-white', 'border-transparent');
+            } else {
+                // Return to normal
+                btn.classList.add('bg-surface-container-high', 'text-on-surface-variant');
+                btn.classList.remove('bg-primary', 'text-white', 'border-transparent');
+            }
+        }
+
+        function updateFeed() {
+            const searchQuery = document.getElementById('search-input').value.toLowerCase();
+            const cards = document.querySelectorAll('.feed-card');
+            
+            // Get selected categories
+            const checkedBoxes = document.querySelectorAll('.category-checkbox:checked');
+            const checkedCategories = Array.from(checkedBoxes).map(cb => cb.value);
+            const isAllChecked = document.getElementById('cat-all').checked;
+            const isNoneChecked = checkedCategories.length === 0;
+
+            cards.forEach(card => {
+                const title = card.getAttribute('data-title').toLowerCase();
+                const type = card.getAttribute('data-type');
+                const category = card.getAttribute('data-category');
+                
+                const matchesSearch = title.includes(searchQuery);
+                const matchesType = (activeType === 'all' || type === activeType);
+                
+                // Show card if all checked, none checked, or card category matches selected
+                const matchesCategory = (isAllChecked || isNoneChecked || checkedCategories.includes(category));
+                
+                if (matchesSearch && matchesType && matchesCategory) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            updateCategoryButtonState();
+        }
+
+        document.getElementById('search-input').addEventListener('input', updateFeed);
+
+        // Details Modal Actions
+        function openDetailsModal(itemId) {
+            const item = itemsData[itemId];
+            if (!item) return;
+
+            document.getElementById('details-modal').setAttribute('data-active-item', itemId);
+
+            // Handle image/icon preview
+            const modalImg = document.getElementById('modal-item-img');
+            const modalImgPlaceholder = document.getElementById('modal-item-img-placeholder');
+            
+            if (item.img.startsWith('http')) {
+                modalImg.src = item.img;
+                modalImg.classList.remove('hidden');
+                modalImgPlaceholder.classList.add('hidden');
+            } else {
+                modalImg.classList.add('hidden');
+                modalImgPlaceholder.classList.remove('hidden');
+            }
+
+            document.getElementById('modal-item-category').textContent = item.category;
+            document.getElementById('modal-item-name').textContent = item.title;
+            document.getElementById('modal-item-location').textContent = item.location;
+            document.getElementById('modal-item-datetime').textContent = item.datetime;
+            document.getElementById('modal-item-desc').textContent = item.desc;
+
+            // Handle status badge
+            const statusBadge = document.getElementById('modal-item-status');
+            if (item.status === 'FOUND') {
+                statusBadge.className = "absolute top-4 left-4 bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full font-label-sm text-xs flex items-center gap-1 shadow-sm font-bold border border-secondary/20";
+                statusBadge.innerHTML = `<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span> FOUND`;
+                
+                document.getElementById('modal-action-btn-text').textContent = "Claim Item";
+                document.getElementById('claim-form-title').textContent = "Verification Claim";
+                document.getElementById('claim-proof-label').textContent = "Proof of Ownership / Distinct Markings";
+                document.getElementById('claim-proof').placeholder = "Describe unique features, markings, serial numbers, or when/where you lost it...";
+            } else {
+                statusBadge.className = "absolute top-4 left-4 bg-[#ffdad6] text-[#ba1a1a] px-3 py-1 rounded-full font-label-sm text-xs flex items-center gap-1 shadow-sm font-bold border border-red-200";
+                statusBadge.innerHTML = `<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">report_problem</span> LOST`;
+                
+                document.getElementById('modal-action-btn-text').textContent = "I Found This Item";
+                document.getElementById('claim-form-title').textContent = "Report Found Info";
+                document.getElementById('claim-proof-label').textContent = "Found Details & Location";
+                document.getElementById('claim-proof').placeholder = "Where did you find it? What is its current condition? Add details if needed...";
+            }
+
+            hideClaimForm();
+
+            // Show Modal
+            const modal = document.getElementById('details-modal');
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modal.querySelector('.bg-white').classList.remove('scale-95');
+            modal.querySelector('.bg-white').classList.add('scale-100');
+        }
+
+        function closeDetailsModal() {
+            const modal = document.getElementById('details-modal');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modal.querySelector('.bg-white').classList.remove('scale-100');
+            modal.querySelector('.bg-white').classList.add('scale-95');
+        }
+
+        // Close modal when clicking outside content area
+        document.getElementById('details-modal').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('details-modal')) {
+                closeDetailsModal();
+            }
+        });
+
+        document.getElementById('success-modal').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('success-modal')) {
+                closeSuccessModal();
+            }
+        });
+
+        // Bottom Add Menu Popup Logic
+        const addBtn = document.getElementById('add-btn');
+        const addIcon = document.getElementById('add-icon');
+        const addMenu = document.getElementById('add-menu');
+        let autoCloseTimeout;
+
+        function toggleMenu(event) {
+            event.stopPropagation();
+
+            const isHidden = addMenu.classList.contains('hidden');
+            if (isHidden) {
+                addMenu.classList.remove('hidden');
+                addMenu.classList.add('show');
+                addIcon.style.transform = 'rotate(135deg)';
+
+                clearTimeout(autoCloseTimeout);
+                autoCloseTimeout = setTimeout(closeMenu, 10000);
+            } else {
+                closeMenu();
+            }
+        }
+
+        function closeMenu() {
+            addMenu.classList.remove('show');
+            addMenu.classList.add('hidden');
+            addIcon.style.transform = 'rotate(0deg)';
+            clearTimeout(autoCloseTimeout);
+        }
+
+        addBtn.addEventListener('click', toggleMenu);
+
+        document.addEventListener('click', (event) => {
+            const isClickInside = addMenu.contains(event.target) || addBtn.contains(event.target);
+            if (!isClickInside) {
+                closeMenu();
+            }
+
+            // Close Category Popup when clicking outside
+            const catPopup = document.getElementById('category-popup');
+            const catBtn = document.getElementById('category-filter-btn');
+            if (catPopup && !catPopup.classList.contains('hidden')) {
+                const clickInsideCat = catPopup.contains(event.target) || catBtn.contains(event.target);
+                if (!clickInsideCat) {
+                    closeCategoryPopup();
+                }
+            }
+        });
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                closeMenu();
+                closeDetailsModal();
+                closeSuccessModal();
+                closeCategoryPopup();
+            }
+        });
+    </script>
+</body>
+</html>
